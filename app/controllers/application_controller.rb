@@ -29,6 +29,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter :set_forum
+
   before_filter :set_current_user_for_logs
   before_filter :set_locale
   before_filter :set_mobile_view
@@ -128,6 +130,15 @@ class ApplicationController < ActionController::Base
   def set_current_user_for_logs
     if current_user
       Logster.add_to_env(request.env,"username",current_user.username)
+    end
+  end
+
+  def set_forum
+    forum_slug = request.host.split('.').first
+    if forum = Forum.where(slug: forum_slug).first
+      @forum_title = forum.title
+    else
+      redirect_to :login
     end
   end
 
