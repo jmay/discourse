@@ -693,17 +693,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def moderating?
-    moderated_categories.any?
-  end
-
-  # reserve the can_ prefix for methods on Guardian classes
-  def doth_moderate?(obj)
+  def moderating?(obj = nil)
     case obj
     when Category
-      obj.deep_moderators.map(&:id).include?(self.id)
+      obj.all_moderators.map(&:id).include?(self.id)
     when Topic
-      doth_moderate?(obj.category)
+      moderating?(obj.category)
+    when nil
+      moderated_categories.any?
     else
       false
     end

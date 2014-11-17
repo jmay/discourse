@@ -80,7 +80,7 @@ describe "Category Moderator" do
 
       [user1, user2].each do |u|
         u.should be_moderating
-        u.doth_moderate?(@category).should be_truthy
+        u.moderating?(@category).should be_truthy
         u.moderated_categories.should eq([@category])
       end
     end

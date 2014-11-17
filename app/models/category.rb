@@ -399,7 +399,7 @@ SQL
   def parent_moderators
     parent_category ? parent_category.moderators : []
   end
-  def deep_moderators
+  def all_moderators
     moderators + parent_moderators
   end
 

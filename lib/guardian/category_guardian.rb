@@ -9,7 +9,7 @@ module CategoryGuardian
       is_moderator?
     ) ||
       (
-        parent && @user.doth_moderate?(parent)
+        parent && @user.moderating?(parent)
       )
   end
 
@@ -21,7 +21,7 @@ module CategoryGuardian
       is_moderator? &&
       can_see_category?(category)
     ) ||
-      @user.doth_moderate?(category)
+      @user.moderating?(category)
   end
 
   def can_delete_category?(category)

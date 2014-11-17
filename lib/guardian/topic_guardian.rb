@@ -22,11 +22,11 @@ module TopicGuardian
     # No users can create posts on deleted topics
     return false if topic.trashed?
 
-    is_staff? || (authenticated? && is_user_leader?) || (not(topic.closed? || topic.archived? || topic.trashed?) && can_create_post?(topic))
+    is_staff? || (authenticated? && is_user_tl4?) || (not(topic.closed? || topic.archived? || topic.trashed?) && can_create_post?(topic))
   end
 
   def trusted_or_moderating_topic?(topic)
-    is_user_regular? || user.doth_moderate?(topic)
+    is_user_tl3? || user.moderating?(topic)
   end
 
   # Editing Method
@@ -44,13 +44,13 @@ module TopicGuardian
 
   def can_delete_topic?(topic)
     !topic.trashed? &&
-    (is_staff? || user.doth_moderate?(topic)) &&
+    (is_staff? || user.moderating?(topic)) &&
     !(Category.exists?(topic_id: topic.id)) &&
     !Discourse.static_doc_topic_ids.include?(topic.id)
   end
 
   def can_reply_as_new_topic?(topic)
-    authenticated? && topic && not(topic.private_message?) && is_user_basic?
+    authenticated? && topic && not(topic.private_message?) && is_user_tl1?
   end
 
   def can_see_deleted_topics?

@@ -53,19 +53,23 @@ class Guardian
     @user.staff?
   end
 
-  def is_user_basic?
+  # Basic
+  def is_user_tl1?
     user.has_trust_level?(TrustLevel[1])
   end
 
-  def is_user_member?
+  # Member
+  def is_user_tl2?
     user.has_trust_level?(TrustLevel[2])
   end
 
-  def is_user_regular?
-    user.has_trust_level?(TrustLevel[2])
+  # Regular
+  def is_user_tl3?
+    user.has_trust_level?(TrustLevel[3])
   end
 
-  def is_user_leader?
+  # Leader
+  def is_user_tl4?
     user.has_trust_level?(TrustLevel[4])
   end
 
@@ -124,10 +128,8 @@ class Guardian
 
   def can_moderate_obj?(obj)
     case obj
-    when Topic
-      is_user_leader? || user.doth_moderate?(obj.category)
-    when Category
-      is_user_leader? || user.doth_moderate?(obj)
+    when Topic, Category
+      is_user_tl4? || user.moderating?(obj)
     else
       false
     end
@@ -225,7 +227,7 @@ class Guardian
     !SiteSetting.enable_sso &&
     SiteSetting.enable_local_logins &&
     (
-      (!SiteSetting.must_approve_users? && is_user_member?) ||
+      (!SiteSetting.must_approve_users? && is_user_tl1?) ||
       is_staff? ||
       user.moderating?
     ) &&
@@ -262,7 +264,7 @@ class Guardian
     # Can't send message to yourself
     is_not_me?(target) &&
     # Have to be a basic level at least
-    is_user_basic? &&
+    is_user_tl1? &&
     # PMs are enabled
     (SiteSetting.enable_private_messages ||
       @user.username == SiteSetting.site_contact_username ||

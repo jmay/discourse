@@ -76,7 +76,7 @@ module PostGuardian
       return false
     end
 
-    if is_staff? || is_user_leader? || user.doth_moderate?(post.topic)
+    if is_staff? || is_user_tl4? || user.moderating?(post.topic)
       return true
     end
 
@@ -117,7 +117,7 @@ module PostGuardian
     # You can delete your own posts
     return !post.user_deleted? if is_my_own?(post)
 
-    is_staff? || @user.doth_moderate?(post.topic)
+    is_staff? || @user.moderating?(post.topic)
   end
 
   # Recovery Method
@@ -161,7 +161,7 @@ module PostGuardian
   end
 
   def can_wiki?(post = nil)
-    is_staff? || is_user_leader? || (post && can_edit_post?(post))
+    is_staff? || is_user_tl4? || (post && can_edit_post?(post))
   end
 
   def can_change_post_type?
