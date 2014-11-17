@@ -24,8 +24,8 @@ Discourse.DiscoveryRoute = Discourse.Route.extend(Discourse.ScrollTop, Discourse
 
       // If we're already loading don't do anything
       if (controller.get('loading')) { return; }
-
       controller.set('loading', true);
+      return true;
     },
 
     loadingComplete: function() {

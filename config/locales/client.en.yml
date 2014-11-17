@@ -278,8 +278,10 @@ en:
       location_not_found: (unknown)
       organisation: Organization
       phone: Phone
-      other_accounts: Other accounts with this IP address
+      other_accounts: "Other accounts with this IP address:"
       no_other_accounts: (none)
+      read_time: "read time:"
+      topics_entered: "topics entered:"
 
     user:
       said: "{{username}}:"
@@ -323,6 +325,7 @@ en:
       deleted_yourself: "Your account has been deleted successfully."
       delete_yourself_not_allowed: "You cannot delete your account right now. Contact an admin to do delete your account for you."
       unread_message_count: "Messages"
+      admin_delete: "Delete"
 
       staff_counters:
         flags_given: "helpful flags"
@@ -660,7 +663,7 @@ en:
       reply: "Reply"
       cancel: "Cancel"
       create_topic: "New Topic"
-      create_pm: "Create Private Message"
+      create_pm: "Private Message"
       title: "Or press Ctrl+Enter"
 
       users_placeholder: "Add a user"
