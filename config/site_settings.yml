@@ -108,7 +108,7 @@ basic:
   post_menu_hidden_items:
     client: true
     type: list
-    default: 'edit|delete|admin'
+    default: 'bookmark|edit|delete|admin'
     choices:
      - like
      - edit
@@ -577,6 +577,7 @@ spam:
       min: 0
       max: 3
   max_new_accounts_per_registration_ip: 3
+  min_ban_entries_for_roll_up: 5
 
 rate_limits:
   unique_posts_mins:

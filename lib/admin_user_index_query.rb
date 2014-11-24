@@ -1,6 +1,7 @@
 require_dependency 'trust_level'
 
 class AdminUserIndexQuery
+
   def initialize(params = {}, klass = User, trust_levels = TrustLevel.levels)
     @params = params
     @query = initialize_query_with_order(klass)
@@ -9,12 +10,34 @@ class AdminUserIndexQuery
 
   attr_reader :params, :trust_levels
 
+  def find_users(limit=100)
+    find_users_query.includes(:user_stat)
+                    .includes(:single_sign_on_record)
+                    .includes(:facebook_user_info)
+                    .includes(:twitter_user_info)
+                    .includes(:github_user_info)
+                    .includes(:google_user_info)
+                    .includes(:oauth2_user_info)
+                    .includes(:user_open_ids)
+                    .limit(limit)
+  end
+
+  def count_users
+    find_users_query.count
+  end
+
   def initialize_query_with_order(klass)
+    order = [params[:order]]
+
     if params[:query] == "active"
-      klass.order("COALESCE(last_seen_at, to_date('1970-01-01', 'YYYY-MM-DD')) DESC, username")
+      order << "COALESCE(last_seen_at, to_date('1970-01-01', 'YYYY-MM-DD')) DESC"
     else
-      klass.order("created_at DESC, username")
+      order << "created_at DESC"
     end
+
+    order << "username"
+
+    klass.order(order.reject(&:blank?).join(","))
   end
 
   def filter_by_trust
@@ -26,18 +49,18 @@ class AdminUserIndexQuery
 
   def filter_by_query_classification
     case params[:query]
-      when 'admins' then @query.where(admin: true)
+      when 'admins'     then @query.where(admin: true)
       when 'moderators' then @query.where(moderator: true)
-      when 'blocked' then @query.blocked
-      when 'suspended' then @query.suspended
-      when 'pending' then @query.not_suspended.where(approved: false)
+      when 'blocked'    then @query.blocked
+      when 'suspended'  then @query.suspended
+      when 'pending'    then @query.not_suspended.where(approved: false)
     end
   end
 
   def filter_by_search
     if params[:filter].present?
-      if params[:filter] =~ Resolv::IPv4::Regex || params[:filter] =~ Resolv::IPv6::Regex
-        @query.where('ip_address = :ip OR registration_ip_address = :ip', ip: params[:filter])
+      if ip = IPAddr.new(params[:filter]) rescue nil
+        @query.where('ip_address <<= :ip OR registration_ip_address <<= :ip', ip: ip.to_cidr_s)
       else
         @query.where('username_lower ILIKE :filter OR email ILIKE :filter', filter: "%#{params[:filter]}%")
       end
@@ -70,15 +93,4 @@ class AdminUserIndexQuery
     @query
   end
 
-  def find_users
-    find_users_query.includes(:user_stat)
-                    .includes(:single_sign_on_record)
-                    .includes(:facebook_user_info)
-                    .includes(:twitter_user_info)
-                    .includes(:github_user_info)
-                    .includes(:google_user_info)
-                    .includes(:oauth2_user_info)
-                    .includes(:user_open_ids)
-                    .take(100)
-  end
 end
