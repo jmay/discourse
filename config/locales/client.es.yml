@@ -247,12 +247,20 @@ es:
       organisation: Organización
       phone: Teléfono
       other_accounts: "Otras cuentas con esta dirección IP:"
+      delete_other_accounts: "Eliminar %{count}"
+      username: "usuario"
+      trust_level: "NC"
+      read_time: "tiempo de lectura"
+      topics_entered: "temas vistos"
+      post_count: "# posts"
+      confirm_delete_other_accounts: "¿Seguro que quieres eliminar estas cuentas?"
     user:
       said: "{{username}}:"
       profile: "Perfil"
       mute: "Silenciar"
       edit: "Editar Preferencias"
       download_archive: "descargar un archivo con mis publicaciones"
+      new_private_message: "Nuevo Mensaje Privado"
       private_message: "Mensaje Privado"
       private_messages: "Mensajes"
       activity_stream: "Actividad"
@@ -337,14 +345,32 @@ es:
         instructions: "Imágenes de fondo serán centrados y tendrán un ancho por default de 590px."
       email:
         title: "E-mail"
-        frequency: "Sólo te enviaremos e-mails si no te hemos visto recientemente y todavía no has visto lo que te estamos enviando."
+        instructions: "Nunca se mostrará públicamente"
+        ok: "Te enviaremos un email para confirmar"
+        invalid: "Por favor, introduce una dirección de correo válida"
+        authenticated: "Tu dirección de correo ha sido autenticada por {{provider}}"
+        frequency:
+          zero: "Te enviaremos un email inmediatamente si no has leído aquello que vamos a enviarte."
+          one: "Solo te enviaremos emails si, pasado un minuto, no te hemos visto y no has leído aquello que vamos a enviarte."
+          other: "Solo te enviaremos emails si, pasados {{count}} minutos, no te hemos visto y no has leído aquello que vamos a enviarte."
       name:
         title: "Nombre"
+        instructions: "Tu nombre completo (opcional)"
+        too_short: "Tu nombre es demasiado corto"
+        ok: "Tu nombre es válido"
       username:
         title: "Nombre de usuario"
+        instructions: "Debe ser único, sin espacios y conciso"
+        short_instructions: "Los demás usuarios pueden mencionarte como @{{username}}"
+        available: "Tu nombre de usuario está disponible"
+        global_match: "La dirección coincide con la del nombre de usuario registrado"
         global_mismatch: "Ya está registrado. ¿Prueba {{suggestion}}?"
         not_available: "No disponible. ¿Prueba {{suggestion}}?"
+        too_short: "Tu nombre de usuario es demasiado corto"
+        too_long: "Tu nombre de usuario es demasiado largo"
         checking: "Comprobando la disponibilidad del nombre de usuario..."
+        enter_email: 'Nombre de usuario encontrado; introduce la dirección de correo correspondiente'
+        prefilled: "El email coincide con el nombre de usuario registrado"
       locale:
         title: "Idioma de la interfaz"
         instructions: "El idioma de la interfaz. Cambiará cuando recargues la página."
@@ -459,6 +485,8 @@ es:
         fixed: "Cargar Página"
     close: "Cerrar"
     assets_changed_confirm: "Este sitio acaba de ser actualizado justo ahora. ¿Quieres recargar la página para ver la última versión?"
+    logout: "Has cerrado sesión."
+    refresh: "Actualizar"
     read_only_mode:
       enabled: "Un administrador ha activado el modo sólo-lectura. Puedes continuar navegando por el sitio pero las interacciones podrían no funcionar."
       login_disabled: "Iniciar sesión está desactivado mientras el foro esté en modo solo lectura."
@@ -661,6 +689,7 @@ es:
         user: "Buscar posts por @{{username}}"
         category: "Buscar la categoría \"{{category}}\""
         topic: "Buscar este tema"
+        private_messages: "Buscar en mensajes privados"
     site_map: "ir a otra lista de temas o categoría"
     go_back: 'volver'
     not_logged_in_user: 'página con el resumen de actividad y preferencias'
@@ -1495,10 +1524,12 @@ es:
             confirm: "¿Estás seguro que quieres regresar la base de datos al estado funcional anterior?"
       export_csv:
         users:
-          text: "Exportar usuarios"
-          title: "Exportar la lista de usuarios en un archivo CSV."
-        success: "La exportación ha sido iniciada. Serás notificado en breves con los avances."
+          title: "Exportar lista completa de usuarios en formato CSV"
+        screened_ips:
+          title: "Exportar lista completa de IPs vifiladas en formato CSV"
+        success: "Exportación iniciada, serás notificado dentro de poco sobre el progreso."
         failed: "Exportación fallida, revisa los logs."
+        button_text: "Exportar"
       customize:
         title: "Personalizar"
         long_title: "Personalizaciones del sitio"
@@ -1574,6 +1605,7 @@ es:
         settings: "Ajustes"
         all: "Todos"
         sending_test: "Enviando e-mail de prueba..."
+        error: "<b>ERROR</b> - %{server_error}"
         test_error: "Hubo un error al enviar el email de prueba. Por favor, revisa la configuración de correo, verifica que tu servicio de alojamiento no esté bloqueando los puertos de conexión de correo, y prueba de nuevo."
         sent: "Enviado"
         skipped: "Omitidos"
@@ -1665,6 +1697,8 @@ es:
           title: "IPs bloqueadas"
           description: 'Direcciones IP que están siendo vigiladas. Usa "Permitir" para añadir direcciones IP preaprobadas.'
           delete_confirm: "Estás seguro que quieres remover el bloqueo para %{ip_address}?"
+          rolled_up_some_subnets: "Se han agrupado con éxito las entradas de IP baneadas a estos rangos: %{subnets}."
+          rolled_up_no_subnet: "No había nada para agrupar."
           actions:
             block: "Bloquear"
             do_nothing: "Permitir"
@@ -1673,6 +1707,9 @@ es:
             label: "Nueva:"
             ip_address: "Dirección IP"
             add: "Añadir"
+          roll_up:
+            text: "Agrupar"
+            title: "Crea un nuevo rango de entradas para banear si hay al menos 'min_ban_entries_for_roll_up' entradas."
         logster:
           title: "Registros de errores"
       impersonate:
@@ -1683,16 +1720,17 @@ es:
         create: 'Añadir Usuario Administrador'
         last_emailed: "Último email enviado"
         not_found: "Lo sentimos, ese usuario no existe."
+        id_not_found: "Lo sentimos, esa id de usuario no existe en nuestro sistema."
         active: "Activo"
-        show_emails: "Mostrat emails"
+        show_emails: "Mostrar emails"
         nav:
           new: "Nuevo"
           active: "Activo"
           pending: "Pendiente"
-          admins: 'Administradores'
-          moderators: 'Moderadores'
+          staff: 'Staff'
           suspended: 'Suspendidos'
           blocked: 'Bloqueados'
+          suspect: 'Sospechoso'
         approved: "Aprobado/s?"
         approved_selected:
           one: "aprobar usuario"
@@ -1709,10 +1747,12 @@ es:
           regular: 'Usuarios con Nivel de confianza 2 (Miembro)'
           leader: 'Usuarios con Nivel de confianza 3 (Habitual)'
           elder: 'Usuarios con Nivel de confianza 4 (Líder)'
+          staff: "Staff"
           admins: 'Administradores'
           moderators: 'Moderadores'
           blocked: 'Usuarios bloqueados'
           suspended: 'Usuarios suspendidos'
+          suspect: 'Usuarios sospechados'
         reject_successful:
           one: "1 usuario rechazado con éxito."
           other: "%{count} usuarios rechazados con éxito."

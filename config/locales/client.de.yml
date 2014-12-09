@@ -144,7 +144,7 @@ de:
       post_count: "Beiträge"
       user_count: "Benutzer"
     bookmarks:
-      not_logged_in: "Entschuldigung, du musst eingeloggt sein, um ein Lesezeichen zu setzen."
+      not_logged_in: "Entschuldigung, du musst angemeldet sein, um ein Lesezeichen zu setzen."
       created: "du hast ein Lesezeichen zu diesem Beitrag hinzugefügt"
       not_bookmarked: "Du hast diesen Beitrag gelesen. Klicke, um ein Lesezeichen zu setzen."
       last_read: "Das ist der letzte Beitrag, den du gelesen hast. Klicke, um ein Lesezeichen zu setzen."
@@ -247,12 +247,20 @@ de:
       organisation: Organisation
       phone: Telefon
       other_accounts: "Andere Konten mit dieser IP-Adresse:"
+      delete_other_accounts: "%{count} löschen"
+      username: "Benutzername"
+      trust_level: "VS"
+      read_time: "Lesezeit"
+      topics_entered: "betrachtete Themen"
+      post_count: "# Beiträge"
+      confirm_delete_other_accounts: "Bist du sicher, dass du diese Konten löschen willst?"
     user:
       said: "{{username}}:"
       profile: "Profil"
       mute: "Stummschalten"
       edit: "Einstellungen bearbeiten"
       download_archive: "Ein Archiv meiner Beiträge herunterladen"
+      new_private_message: "Neue private Nachricht"
       private_message: "Private Nachricht"
       private_messages: "Nachrichten"
       activity_stream: "Aktivität"
@@ -337,14 +345,32 @@ de:
         instructions: "Hintergrundbilder werden zentriert und haben eine Standardbreite von 590px."
       email:
         title: "E-Mail"
-        frequency: "Wir werden dir nur E-Mails senden, wenn wir dich kürzlich nicht gesehen haben und wenn du die betroffenen Inhalte noch nicht gesehen hast."
+        instructions: "Wird niemals öffentlich angezeigt"
+        ok: "Wir senden dir zur Bestätigung eine E-Mail"
+        invalid: "Bitte gib eine gültige E-Mail-Adresse ein"
+        authenticated: "Deine E-Mail-Adresse wurde von {{provider}} bestätigt"
+        frequency:
+          zero: "Wir werden dir sofort eine E-Mail senden, wenn du die betroffenen Inhalte noch nicht gelesen hast."
+          one: "Wir werden dir nur dann eine E-Mail senden, wenn wir dich innerhalb der letzten Minute nicht gesehen haben und wenn du die betroffenen Inhalte noch nicht gelesen hast. "
+          other: "Wir werden dir nur dann eine E-Mail senden, wenn wir dich innerhalb der letzten {{count}} Minuten nicht gesehen haben und wenn du die betroffenen Inhalte noch nicht gelesen hast. "
       name:
         title: "Name"
+        instructions: "Dein vollständiger Name (optional)"
+        too_short: "Dein Name ist zu kurz"
+        ok: "Dein Name sieht in Ordnung aus"
       username:
         title: "Benutzername"
+        instructions: "Eindeutig, keine Leerzeichen, kurz"
+        short_instructions: "Leute können dich mit @{{username}} erwähnen"
+        available: "Dein Benutzername ist verfügbar"
+        global_match: "E-Mail-Adresse entspricht dem registrierten Benutzernamen"
         global_mismatch: "Bereits registriert. Wie wäre es mit {{suggestion}}?"
         not_available: "Nicht verfügbar. Wie wäre es mit {{suggestion}}?"
+        too_short: "Dein Benutzername ist zu kurz"
+        too_long: "Dein Benutzername ist zu lang"
         checking: "Verfügbarkeit wird geprüft..."
+        enter_email: 'Benutzername gefunden; gib die zugehörige E-Mail-Adresse ein'
+        prefilled: "E-Mail-Adresse entspricht diesem registrierten Benutzernamen"
       locale:
         title: "Oberflächensprache"
         instructions: "Die Sprache der Forumsoberfläche. Diese Änderung tritt nach dem Neuladen der Seite in Kraft."
@@ -373,7 +399,7 @@ de:
       categories_settings: "Kategorien"
       new_topic_duration:
         label: "Themen als neu ansehen, wenn"
-        not_viewed: "ich sie noch nicht betrachtet habe"
+        not_viewed: "ich diese noch nicht betrachtet habe"
         last_here: "seit meinem letzten Besuch erstellt"
         after_n_days:
           one: "vor einem Tag erstellt"
@@ -421,7 +447,7 @@ de:
         title: "Passwort"
         too_short: "Dein Passwort ist zu kurz."
         common: "Das Passwort wird zu häufig verwendet."
-        ok: "Dein Passwort sieht gut aus."
+        ok: "Dein Passwort sieht in Ordnung aus."
         instructions: "Mindestens %{count} Zeichen."
       associated_accounts: "Zugehörige Konten"
       ip_address:
@@ -459,6 +485,8 @@ de:
         fixed: "Seite laden"
     close: "Schließen"
     assets_changed_confirm: "Diese Website wurde gerade aktualisiert. Neu laden für die neuste Version?"
+    logout: "Du wurdest abgemeldet."
+    refresh: "Aktualisieren"
     read_only_mode:
       enabled: "Ein Administrator hat den Nur-Lesen-Modus aktiviert. Du kannst die Website weiter durchsuchen und lesen. Einige Funktionen werden jedoch wahrscheinlich nicht funktionieren."
       login_disabled: "Die Anmeldung ist deaktiviert während sich die Website im Nur-Lesen-Modus befindet."
@@ -527,9 +555,9 @@ de:
       awaiting_confirmation: "Dein Konto ist noch nicht aktiviert. Verwende den 'Passwort vergessen'-Link, um eine weitere E-Mail mit Anweisungen zur Aktivierung zu erhalten."
       awaiting_approval: "Dein Konto wurde noch nicht von einem Mitarbeiter genehmigt. Du bekommst eine E-Mail, sobald das geschehen ist."
       requires_invite: "Entschuldige, der Zugriff auf dieses Forum ist nur mit einer Einladung möglich."
-      not_activated: "Du kannst dich noch nicht einloggen. Wir haben dir schon eine E-Mail zur Aktivierung an <b>{{sentTo}}</b> geschickt. Bitte folge den Anweisungen in dieser E-Mail, um dein Benutzerkonto zu aktivieren."
+      not_activated: "Du kannst dich noch nicht anmelden. Wir haben dir schon eine E-Mail zur Aktivierung an <b>{{sentTo}}</b> geschickt. Bitte folge den Anweisungen in dieser E-Mail, um dein Benutzerkonto zu aktivieren."
       not_allowed_from_ip_address: "Du kannst dich mit dieser IP-Adresse nicht anmelden."
-      resend_activation_email: "Klicke hier um eine neue Aktivierungsmail zu schicken."
+      resend_activation_email: "Klicke hier, um eine neue Aktivierungsmail zu schicken."
       sent_activation_email_again: "Wir haben dir eine weitere E-Mail zur Aktivierung an <b>{{currentEmail}}</b> geschickt. Es könnte ein paar Minuten dauern, bis diese ankommt; sieh auch im Spam-Ordner nach."
       google:
         title: "mit Google"
@@ -573,7 +601,7 @@ de:
       reply: "Antworten"
       cancel: "Abbrechen"
       create_topic: "Thema erstellen"
-      create_pm: "Private Nachricht"
+      create_pm: "Private Nachricht erstellen"
       title: "Oder drücke Strg+Eingabetaste"
       users_placeholder: "Benutzer hinzufügen"
       title_placeholder: "Um was geht es in dieser Diskussion? Schreib einen kurzen Satz."
@@ -615,7 +643,7 @@ de:
       admin_options_title: "Optionale Mitarbeiter-Einstellungen für dieses Thema"
       auto_close:
         label: "Thema automatisch schließen:"
-        error: "Bitte geben Sie einen gültigen Wert ein."
+        error: "Bitte gib einen gültigen Wert ein."
         based_on_last_post: "Das Thema nicht schließen, wenn der letzte Beitrag nicht mindestens so alt ist."
         all:
           examples: 'Gib die Anzahl von Stunden (24), eine absolute Uhrzeit (17:30) oder einen Zeitstempel (2013-11-22 14:00) ein.'
@@ -661,6 +689,7 @@ de:
         user: "Beiträge von @{{username}} durchsuchen"
         category: "Kategorie „{{category}}“ durchsuchen"
         topic: "Dieses Thema durchsuchen"
+        private_messages: "Private Nachrichten durchsuchen"
     site_map: "zu einer anderen Themenliste oder Kategorie wechseln"
     go_back: 'zurückgehen'
     not_logged_in_user: 'Benutzerseite mit einer Zusammenfassung der Benutzeraktivitäten und Einstellungen'
@@ -947,7 +976,7 @@ de:
         upload_not_authorized: "Entschuldige, die Datei, die du hochladen wolltest, ist nicht erlaubt (erlaubte Endungen: {{authorized_extensions}})."
         image_upload_not_allowed_for_new_user: "Entschuldige, neue Benutzer dürfen keine Bilder hochladen."
         attachment_upload_not_allowed_for_new_user: "Entschuldige, neue Benutzer dürfen keine Dateien hochladen."
-        attachment_download_requires_login: "Du musst eingeloggt sein, um Dateien herunterladen zu können."
+        attachment_download_requires_login: "Du musst angemeldet sein, um Dateien herunterladen zu können."
       abandon:
         confirm: "Möchtest du deinen Beitrag wirklich verwerfen?"
         no_value: "Nein, beibehalten"
@@ -1305,9 +1334,9 @@ de:
         other_periods: "zeige weitere angesagte Themen"
     browser_update: '<a href="http://www.discourse.org/faq/#browser">Dein Webbrowser ist leider zu alt, um dieses Forum zu besuchen</a>. Bitte <a href="http://browsehappy.com">installiere einen neueren Browser</a>.'
     permission_types:
-      full: "Erstellen / Antworten / Anschauen"
-      create_post: "Antworten / Anschauen"
-      readonly: "Anschauen"
+      full: "Erstellen / Antworten / Ansehen"
+      create_post: "Antworten / Ansehen"
+      readonly: "Ansehen"
   admin_js:
     type_to_filter: "zum Filtern hier eingeben..."
     admin:
@@ -1497,10 +1526,12 @@ de:
             confirm: "Möchtest du wirklich die Datenbank auf den letzten funktionierenden Stand zurücksetzen?"
       export_csv:
         users:
-          text: "Exportieren"
-          title: "Exportiere eine Benutzerliste als CSV-Datei."
+          title: "Vollständige Benutzerliste im CSV-Format exportieren."
+        screened_ips:
+          title: "Vollständige Liste der überprüften IP-Adressen im CSV-Format exportieren."
         success: "Der Export wurde gestartet. Du wirst in Kürze über den Fortschritt benachrichtigt."
         failed: "Der Export ist fehlgeschlagen. Bitte überprüfe die Logs."
+        button_text: "Exportieren"
       customize:
         title: "Anpassen"
         long_title: "Website-Anpassungen"
@@ -1576,6 +1607,7 @@ de:
         settings: "Einstellungen"
         all: "Alle"
         sending_test: "Versende Test-E-Mail..."
+        error: "<b>FEHLER</b> - %{server_error}"
         test_error: "Es gab ein Problem beim Senden der Test-E-Mail. Bitte überprüfe nochmals deine E-Mail-Einstellungen, stelle sicher dass dein Anbieter keine E-Mail-Verbindungen blockiert und probiere es erneut."
         sent: "Gesendet"
         skipped: "Übersprungen"
@@ -1667,6 +1699,8 @@ de:
           title: "Überprüfte IPs"
           description: 'IP-Adressen die beobachtet werden. Benutze „Erlauben“, um IP-Adressen auf die Whitelist zu setzen.'
           delete_confirm: "Möchtest du wirklich die Regel für %{ip_address} entfernen?"
+          rolled_up_some_subnets: "Die geblockten IP-Adressen wurden erfolgreich zu diesen Subnetzen zusammengefasst: %{subnets}"
+          rolled_up_no_subnet: "Es konnte nichts zusammengefasst werden."
           actions:
             block: "Blockieren"
             do_nothing: "Erlauben"
@@ -1675,6 +1709,9 @@ de:
             label: "Neu:"
             ip_address: "IP-Adresse"
             add: "Hinzufügen"
+          roll_up:
+            text: "Zusammenfassen"
+            title: "Erzeugt neue Einträge zum Blockieren von Subnetzen, wenn mindestens 'min_ban_entries_for_roll_up' Einträge vorhanden sind."
         logster:
           title: "Fehlerprotokolle"
       impersonate:
@@ -1685,16 +1722,17 @@ de:
         create: 'Administrator hinzufügen'
         last_emailed: "Letzte E-Mail"
         not_found: "Entschuldige, dieser Benutzername existiert im System nicht."
+        id_not_found: "Entschuldigung, diese Benutzerkennung ist in unserem System nicht vorhanden."
         active: "Aktiv"
         show_emails: "E-Mails anzeigen"
         nav:
           new: "Neu"
           active: "Aktiv"
           pending: "Genehmigung"
-          admins: 'Administratoren'
-          moderators: 'Moderatoren'
+          staff: 'Mitarbeiter'
           suspended: 'Gesperrt'
           blocked: 'Blockiert'
+          suspect: 'Verdächtiger'
         approved: "Genehmigt?"
         approved_selected:
           one: "Benutzer genehmigen"
@@ -1711,10 +1749,12 @@ de:
           regular: 'Benutzer mit Vertrauensstufe 2 (Mitglied)'
           leader: 'Benutzer mit Vertrauensstufe 3 (Stammgast)'
           elder: 'Benutzer mit Vertrauensstufe 4 (Leitwolf)'
+          staff: "Mitarbeiter"
           admins: 'Administratoren'
           moderators: 'Moderatoren'
           blocked: 'Blockierte Benutzer'
           suspended: 'Gesperrte Benutzer'
+          suspect: 'Verdächtige Benutzer'
         reject_successful:
           one: "Erfolgreich 1 Benutzer abgelehnt."
           other: "Erfolgreich %{count} Benutzer abgelehnt."
@@ -1801,7 +1841,7 @@ de:
         unblock_failed: 'Beim Aufheben der Blockierung des Benutzers ist ein Fehler aufgetreten.'
         block_failed: 'Beim Blocken des Benutzers ist ein Fehler aufgetreten.'
         deactivate_explanation: "Ein deaktivierter Benutzer muss seine E-Mail-Adresse erneut bestätigen."
-        suspended_explanation: "Ein gesperrter Benutzer kann sich nicht einloggen."
+        suspended_explanation: "Ein gesperrter Benutzer kann sich nicht anmelden."
         block_explanation: "Ein geblockter Benutzer kann keine Themen erstellen oder Beiträge veröffentlichen."
         trust_level_change_failed: "Beim Wechsel der Vertrauensstufe ist ein Fehler aufgetreten."
         suspend_modal_title: "Benutzer sperren"

@@ -336,7 +336,6 @@ sq:
         instructions: "Sfondi profilit do të vendoset në qendër dhe do të ketë një gjerësi prej 590px."
       email:
         title: "Email"
-        frequency: "We'll only email you if we haven't seen you recently and you haven't already seen the thing we're emailing you about."
       name:
         title: "Emri"
       username:
@@ -1492,10 +1491,6 @@ sq:
             title: "Rollback the database to previous working state"
             confirm: "Are your sure you want to rollback the database to the previous working state?"
       export_csv:
-        users:
-          text: "Export Users"
-          title: "Export user list in a CSV file."
-        success: "Export has been initiated, you will be notified shortly with progress."
         failed: "Export failed. Please check the logs."
       customize:
         title: "Personalizo"
@@ -1687,8 +1682,6 @@ sq:
           new: "New"
           active: "Aktiv"
           pending: "Pezulluar"
-          admins: 'Admins'
-          moderators: 'Mods'
           suspended: 'Suspended'
           blocked: 'Blocked'
         approved: "Aprovuar?"

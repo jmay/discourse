@@ -181,6 +181,7 @@ Discourse::Application.routes.draw do
     end
 
     get "memory_stats"=> "diagnostics#memory_stats", constraints: AdminConstraint.new
+    get "dump_heap"=> "diagnostics#dump_heap", constraints: AdminConstraint.new
 
   end # admin namespace
 
@@ -197,6 +198,7 @@ Discourse::Application.routes.draw do
 
   get "session/sso" => "session#sso"
   get "session/sso_login" => "session#sso_login"
+  get "session/sso_provider" => "session#sso_provider"
   get "session/current" => "session#current"
   get "session/csrf" => "session#csrf"
   get "composer-messages" => "composer_messages#index"
@@ -242,14 +244,11 @@ Discourse::Application.routes.draw do
   put "users/:username/preferences/badge_title" => "users#badge_title", constraints: {username: USERNAME_ROUTE_FORMAT}
   get "users/:username/preferences/username" => "users#preferences", constraints: {username: USERNAME_ROUTE_FORMAT}
   put "users/:username/preferences/username" => "users#username", constraints: {username: USERNAME_ROUTE_FORMAT}
-  get "users/:username/avatar(/:size)" => "users#avatar", constraints: {username: USERNAME_ROUTE_FORMAT} # LEGACY ROUTE
-  post "users/:username/preferences/avatar" => "users#upload_avatar", constraints: {username: USERNAME_ROUTE_FORMAT} # LEGACY ROUTE
   post "users/:username/preferences/user_image" => "users#upload_user_image", constraints: {username: USERNAME_ROUTE_FORMAT}
   delete "users/:username/preferences/user_image" => "users#destroy_user_image", constraints: {username: USERNAME_ROUTE_FORMAT}
   put "users/:username/preferences/avatar/pick" => "users#pick_avatar", constraints: {username: USERNAME_ROUTE_FORMAT}
   get "users/:username/preferences/card-badge" => "users#card_badge", constraints: {username: USERNAME_ROUTE_FORMAT}
   put "users/:username/preferences/card-badge" => "users#update_card_badge", constraints: {username: USERNAME_ROUTE_FORMAT}
-
 
   get "users/:username/invited" => "users#invited", constraints: {username: USERNAME_ROUTE_FORMAT}
   post "users/action/send_activation_email" => "users#send_activation_email"

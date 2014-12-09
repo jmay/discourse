@@ -397,8 +397,8 @@ class Topic < ActiveRecord::Base
     similar
   end
 
-  def update_status(status, enabled, user)
-    TopicStatusUpdate.new(self, user).update!(status, enabled)
+  def update_status(status, enabled, user, message=nil)
+    TopicStatusUpdate.new(self, user).update!(status, enabled, message)
   end
 
   # Atomically creates the next post number
@@ -797,10 +797,10 @@ class Topic < ActiveRecord::Base
       else
         self.auto_close_started_at ||= Time.zone.now
       end
-      if by_user.try(:staff?)
+      if by_user.try(:staff?) || by_user.try(:trust_level) == TrustLevel[4]
         self.auto_close_user = by_user
       else
-        self.auto_close_user ||= (self.user.staff? ? self.user : Discourse.system_user)
+        self.auto_close_user ||= (self.user.staff? || self.user.trust_level == TrustLevel[4] ? self.user : Discourse.system_user)
       end
     end
 
