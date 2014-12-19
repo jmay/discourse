@@ -24,7 +24,7 @@ required:
     default: ''
     type: email
   notification_email:
-    default: 'info@unconfigured.discourse.org'
+    default: 'noreply@unconfigured.discourse.org'
     type: email
   site_contact_username:
     default: ''
@@ -151,10 +151,6 @@ basic:
   fixed_category_positions:
     client: true
     default: false
-  topics_per_page:
-    default: 30
-    min: 1
-    client: true
   show_subcategory_list:
     default: false
     client: true
@@ -652,10 +648,6 @@ developer:
   verbose_localization:
     default: false
     client: true
-  posts_chunksize:
-    client: true
-    default: 20
-    min: 1
 
 embedding:
   embeddable_host: ''
